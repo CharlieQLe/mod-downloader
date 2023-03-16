@@ -1,0 +1,28 @@
+{
+  "name": "gnome-typescript-template",
+  "type": "module",
+  "version": "0.1.0",
+  "main": "src/main.js",
+  "author": "Charlie Le <20309750+CharlieQLe@users.noreply.github.com>",
+  "license": "GPL-3.0-only",
+  "dependencies": {
+    "typescript": "^4.9.4"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
+    "eslint": "^8.33.0",
+    "rollup": "^3.16.0",
+    "rollup-plugin-dts": "^5.2.0"
+  },
+  "scripts": {
+    "compile:rollup": "rollup -c",
+    "compile:ts": "tsc --strict",
+    "generate:sources": "sh scripts/generate-sources.sh",
+    "dependencies:flatpak": "sh scripts/flatpak-dependencies.sh",
+    "dependencies:fedora": "sh scripts/fedora-dependencies.sh"
+  }
+}
