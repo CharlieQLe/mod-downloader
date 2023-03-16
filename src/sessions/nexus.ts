@@ -1,5 +1,6 @@
 import Soup from 'gi://Soup?version=3.0';
 import GLib from 'gi://GLib';
+import Gio from 'gi://Gio';
 
 const BASE_URL = 'https://api.nexusmods.com/v1';
 
@@ -287,4 +288,48 @@ export class NexusSession {
         const str = new TextDecoder().decode(bytes.toArray());
         return [responseHeader, JSON.parse(str) as []];
     }
+
+    // DOWNLOADS
+
+    public async downloadFileAsync(link: string, filename: string) {
+        const msg = Soup.Message.new("GET", link);
+        const bytes = await this._session.send_and_read_async(msg, GLib.PRIORITY_DEFAULT, null);
+        log('finished sending and reading');
+        const file = Gio.File.new_for_path(`${GLib.get_home_dir()}/${filename}`); // TODO: Use proper location
+        if (file.query_exists(null)) await file.delete_async(GLib.PRIORITY_DEFAULT, null);
+        const stream = await file.create_async(Gio.FileCreateFlags.NONE, GLib.PRIORITY_DEFAULT, null);
+        await stream.write_bytes_async(bytes.toArray(), GLib.PRIORITY_DEFAULT, null);
+        await stream.close_async(GLib.PRIORITY_DEFAULT, null);
+    }
+}
+
+export interface NexusUriComponents {
+    gameDomainName: string,
+    modId: number,
+    fileId: number,
+    key: string,
+    expires: number,
+}
+
+export function handleNxmUri(uri: string): NexusUriComponents {
+    if (!uri.startsWith('nxm://')) {
+        throw new Error(`URI '${uri}' is not valid!`)
+    }
+    const data = uri.substring(6).split('/');
+    const fileDataSplit = data[4].split('?');
+
+    let key = '';
+    let expires = -1;
+    fileDataSplit[1].split('&').forEach(q => {
+        const split = q.split('=');
+        if (q.startsWith('key=')) key = split[1];
+        else if (q.startsWith('expires=')) expires = parseInt(split[1]);
+    })
+    return {
+        gameDomainName: data[0],
+        modId: parseInt(data[2]),
+        fileId: parseInt(fileDataSplit[0]),
+        key: key,
+        expires: expires
+    };
 }
