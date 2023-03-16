@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Mod Downloader
+Exec=mod-downloader
+Icon=io.github.charlieqle.ModDownloader
+Terminal=false
+Type=Application
+Categories=GTK;
+StartupNotify=true

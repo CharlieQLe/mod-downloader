@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/io/github/charlieqle/ModDownloader">
+    <file preprocess="xml-stripblanks">gtk/help-overlay.ui</file>
+    <file preprocess="xml-stripblanks">ui/add-download-window.ui</file>
+    <file preprocess="xml-stripblanks">ui/preferences-window.ui</file>
+    <file preprocess="xml-stripblanks">ui/window.ui</file>
+    <file>style.css</file>
+    <file>style-dark.css</file>
+  </gresource>
+  <gresource prefix="/io/github/charlieqle/ModDownloader/icons/scalable/actions">
+    <file alias="download-symbolic.svg">icons/download-symbolic.svg</file>
+    <file alias="go-previous-symbolic.svg">icons/go-previous-symbolic.svg</file>
+  </gresource>
+</gresources>

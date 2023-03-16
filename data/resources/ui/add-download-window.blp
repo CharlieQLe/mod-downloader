@@ -1,0 +1,53 @@
+using Gtk 4.0;
+using Adw 1;
+
+template AddDownloadWindow : Adw.Window {
+    default-width: 300;
+    default-height: 200;
+    modal: true;
+    content: Gtk.Box {
+        orientation: vertical;
+
+        Adw.HeaderBar {
+            title-widget: Adw.WindowTitle {
+                title: "Paste URL";
+            };
+            decoration-layout: "";
+
+            [start]
+            Gtk.Button {
+                icon-name: "go-previous-symbolic";
+                clicked => onGoBackClicked();
+            }
+
+            [end]
+            Gtk.Button downloadBtn {
+                sensitive: false;
+                label: "Download";
+                clicked => onDownloadClicked();
+
+                styles [ "suggested-action" ]
+            }
+            
+            styles [ "flat" ]
+        }
+
+        Adw.Clamp {
+            child: Gtk.Box {
+                orientation: vertical;
+                spacing: 24;
+                margin-top: 24;
+                margin-bottom: 24;
+                margin-start: 12;
+                margin-end: 12;
+
+                Adw.PreferencesGroup {
+                    Adw.EntryRow urlRow {
+                        title: "URL";
+                        changed => onUrlChanged();
+                    }
+                }
+            };
+        }
+    };
+}

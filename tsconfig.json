@@ -9,7 +9,7 @@
                 "@types/*",
                 "@types/gi-types/*"
             ],
-            "resource:///io/github/charlieqle/GnomeTypescriptTemplate/js/*": [ "src/*" ]
+            "resource:///io/github/charlieqle/ModDownloader/js/*": [ "src/*" ]
 	    },
 	    "target": "ES2021",
         "baseUrl": ".",

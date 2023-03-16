@@ -1,12 +1,12 @@
 {
-    "id" : "io.github.charlieqle.GnomeTypescriptTemplate",
+    "id" : "io.github.charlieqle.ModDownloader",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "43",
     "sdk" : "org.gnome.Sdk",
     "sdk-extensions": [
         "org.freedesktop.Sdk.Extension.node18"
     ],
-    "command" : "gnome-typescript-template",
+    "command" : "mod-downloader",
     "build-options": {
         "append-path": "/usr/lib/sdk/node18/bin",
         "env": {
@@ -33,7 +33,7 @@
     ],
     "modules" : [
         {
-            "name" : "gnome-typescript-template",
+            "name" : "mod-downloader",
             "builddir" : true,
             "buildsystem" : "meson",
             "config-opts": [
